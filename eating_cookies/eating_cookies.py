@@ -7,7 +7,12 @@ import sys
 # recursive solution
 
 
+# This solution actually works for larger ns, but I wrote not to accept a cache as an argument (which I think is better than requiring a cache). However, the tests in test_eating_cookies.py _do_ pass in a cache, which breaks my code. I added two lines to reject the incoming cache.
+
 def eating_cookies(n, cache={0: 1, 1: 1, 2: 2}):
+    # The following two lines reject any cache passed in as an argument:
+    if cache[0] == 0:
+        cache = {0: 1, 1: 1, 2: 2}
     if n in cache:
         return cache[n]
     else:
@@ -23,3 +28,6 @@ if __name__ == "__main__":
             ways=eating_cookies(num_cookies), n=num_cookies))
     else:
         print('Usage: eating_cookies.py [num_cookies]')
+
+
+print(eating_cookies(50))
